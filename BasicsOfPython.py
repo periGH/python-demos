@@ -239,7 +239,7 @@ def power(base, exponent=2):
     return base ** exponent
 
 
-# --- Callinf Functions --- 
+# --- Calling Functions --- 
 
 # Call the greet function
 user_name = "Ada"
@@ -287,3 +287,68 @@ even_numbers = list(filter(lambda x: x % 2 == 0))
 print(f"Even numbers from the list: {even_numbers}")
 
 print("\nEnd of Functions Demonstration!")
+
+
+## Class/Object Demonstration
+
+# --- Classes ad Objects ---
+
+# Animal class
+class Animal: 
+    # Constructor (initializing instance attributes)
+    def __init__(self, species, sound):
+        self.species = species # instance variable for species (public attribute)
+        self.__sound = sound # instance variable for sound (private attribute)
+
+    # Public method to display basic info about the animal 
+    def display_info(self):
+        print(f"I am a {self.species}.")
+        # Call the private method
+        self.__make_sound()
+
+    # Private method to simulate the animal making a sound (encapsulation)
+    def __make_sound(self):
+        print(f"I make a {self.__sound} sound.")
+
+    # Abstract method to demonstrate method abstraction (even tho Python does not fully support abstraction like Java)
+    def move(self):
+        # Raise an error if the method is not implemented in a subclass 
+        raise NotImplementedError("Subclasses must implement this method")
+
+    # Dog class, inherits properties and behaviours from the parent (Animal) class
+    class Dog(Animal): 
+        # Constructor for Dog class, (initializing species and sounds from the parent class)
+        super().__init__("Dog", "bark") # calling the constructor of the parent class 
+        self.breed = breed # instance variable for breed, specific to Dog class
+
+        # Overriding the move method from the parent class to provide specific implementations for dogs
+        def move(self):
+            print("I like to run and play with kids, I am a dog!")
+
+        # Specific method to the Dog class 
+        def fetch(self):
+            print("Fethcing the ball!")
+
+
+# --- Objects: Instances of Classes ----
+
+# Creating an instance of the Animal class 
+animal = Animal("Golden Retriever", "woof woof" )
+# Creating an instance of the Dog class
+dog = Dog ("Goldendoodle")
+
+# Calling the methods on the Animal instance 
+animal.display_info()
+
+# Calling the methods on the Dog instance
+dog.display_info() # inherits from the parent class 
+dog.move() # overrides the methdod specific to the Dog class
+dog.fetch() # specific method to Dog class 
+
+
+# Demonstrating encapsulation: Direct access to private attributes from outside the class will raise an error
+# Uncommenting the next line would raise an AttributeError
+# print(animal.__sound)
+# To access the attribute outside the class, you'd typically use getter methods or name mangling: print(animal._Animal__sound)
+
+print("\nEnd of Classes/Objects Demonstration!")
